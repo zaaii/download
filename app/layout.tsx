@@ -17,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Tempztorage",
-  description: "Temporary storage",
+  title: "paste",
+  description: "Paste",
 };
 
 export default function RootLayout({
