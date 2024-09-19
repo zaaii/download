@@ -18,7 +18,7 @@ export default async function PastePage({ params }: { params: { id: string } }) 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Paste {params.id}</h1>
-      <pre className="bg-gray-100 p-4 rounded-md whitespace-pre-wrap">{paste.content}</pre>
+      <pre className="p-4 rounded-md whitespace-pre-wrap">{paste.content}</pre>
       <div className="mt-4">
         <Button asChild>
           <Link href="/">Create New Paste</Link>
