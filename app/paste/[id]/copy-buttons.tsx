@@ -3,8 +3,8 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Copy, Link as LinkIcon, Check } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
-
+import { useToast } from "@/hooks/use-toast"
+ 
 interface CopyButtonsProps {
   content: string;
   id: string;
@@ -13,16 +13,16 @@ interface CopyButtonsProps {
 export default function CopyButtons({ content, id }: CopyButtonsProps) {
   const [copiedContent, setCopiedContent] = React.useState(false);
   const [copiedLink, setCopiedLink] = React.useState(false);
+  const { toast } = useToast();
 
-  const copyToClipboard = async (text: string, type: "content" | "link") => {
+  const copyToClipboard = React.useCallback(async (text: string, type: "content" | "link") => {
     try {
       if (navigator.clipboard && window.isSecureContext) {
-        // Use Clipboard API if available and in a secure context
         await navigator.clipboard.writeText(text);
       } else {
-        // Fallback for browsers that don't support Clipboard API
         const textArea = document.createElement("textarea");
         textArea.value = text;
+        textArea.style.position = "fixed";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
@@ -31,8 +31,9 @@ export default function CopyButtons({ content, id }: CopyButtonsProps) {
         } catch (err) {
           console.error("Fallback: Oops, unable to copy", err);
           throw err;
+        } finally {
+          document.body.removeChild(textArea);
         }
-        document.body.removeChild(textArea);
       }
 
       if (type === "content") {
@@ -44,20 +45,17 @@ export default function CopyButtons({ content, id }: CopyButtonsProps) {
       }
       toast({
         title: "Copied!",
-        description: `${
-          type === "content" ? "Paste content" : "Paste link"
-        } copied to clipboard.`,
+        description: `${type === "content" ? "Paste content" : "Paste link"} copied to clipboard.`,
       });
     } catch (err) {
       console.error("Failed to copy: ", err);
       toast({
         title: "Error",
-        description:
-          "Failed to copy to clipboard. Please try selecting and copying manually.",
+        description: "Failed to copy to clipboard. Please try selecting and copying manually.",
         variant: "destructive",
       });
     }
-  };
+  }, [toast]);
 
   const getPageUrl = () => {
     if (typeof window !== "undefined") {

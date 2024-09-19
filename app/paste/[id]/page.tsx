@@ -32,15 +32,15 @@ export default async function PastePage({
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Paste</h1>
-      <div className="mt-4">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-3xl p-4">
+        <h1 className="text-2xl font-bold mb-4 text-center">Paste</h1>
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Paste Code: {paste.id}</CardTitle>
           </CardHeader>
           <CardContent>
-            <CardDescription className="whitespace-pre-wrap">{paste.content}</CardDescription>
+            <CardDescription className="whitespace-pre-wrap break-all overflow-x-auto max-h-[60vh]">{paste.content}</CardDescription>
           </CardContent>
           <CardFooter className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between sm:items-center">
             <CopyButtons content={paste.content} id={paste.id} />

@@ -54,8 +54,9 @@ export default function Home() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Create a New Paste</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className='w-full max-w-3xl p-4'>
+      <h1 className="text-2xl font-bold mb-4 text-center">Create a New Paste</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="pasteCode" className="block text-sm font-medium text-gray-700 mb-1">
@@ -76,6 +77,7 @@ export default function Home() {
         />
         <Button type="submit">Create Paste</Button>
       </form>
+      </div>
     </div>
   )
 }
