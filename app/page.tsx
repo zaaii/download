@@ -23,14 +23,14 @@ export default function Home() {
       return
     }
 
-    if (!pasteCode.trim()) {
-      toast({
-        title: "Error",
-        description: "Please enter a paste code",
-        variant: "destructive",
-      })
-      return
-    }
+    // if (!pasteCode.trim()) {
+    //   toast({
+    //     title: "Error",
+    //     description: "Please enter a paste code",
+    //     variant: "destructive",
+    //   })
+    //   return
+    // }
 
     const response = await fetch('/api/paste', {
       method: 'POST',

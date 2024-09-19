@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Copy, Link as LinkIcon, Check } from "lucide-react"
-import { toast } from '@/hooks/use-toast'
+import { toast } from "@/hooks/use-toast"
 
 interface CopyButtonsProps {
   content: string
@@ -55,7 +55,7 @@ export default function CopyButtons({ content, id }: CopyButtonsProps) {
       <Button
         variant="outline"
         size="sm"
-        onClick={() => copyToClipboard(`${window.location.origin}/paste/${id}`, 'link')}
+        onClick={() => copyToClipboard(`${typeof window !== 'undefined' ? window.location.origin : ''}/paste/${id}`, 'link')}
       >
         {copiedLink ? (
           <Check className="h-4 w-4 mr-2" />

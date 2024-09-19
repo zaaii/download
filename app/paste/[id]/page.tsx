@@ -37,7 +37,7 @@ export default async function PastePage({
       <div className="mt-4">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle>Kode paste {paste.id}</CardTitle>
+            <CardTitle>Paste Code: {paste.id}</CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className="whitespace-pre-wrap">{paste.content}</CardDescription>

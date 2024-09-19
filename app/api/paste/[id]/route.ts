@@ -9,7 +9,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
   try {
     const content = await fs.readFile(filePath, 'utf-8')
-    return NextResponse.json({ content })
+    return NextResponse.json({ id: params.id, content })
   } catch (error) {
     return NextResponse.json({ error: 'Paste not found' }, { status: 404 })
   }
