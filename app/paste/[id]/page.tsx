@@ -33,8 +33,10 @@ export default async function PastePage({
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Paste {params.id}</h1>
-      <div className="mt-3">
+      <div className="mt-4">
         <Card className="w-full">
+          <CardHeader>
+          </CardHeader>
           <CardContent>
             <CardDescription>{paste.content}</CardDescription>
           </CardContent>
