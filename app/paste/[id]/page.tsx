@@ -1,29 +1,54 @@
-import { notFound } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import Link from 'next/link'
+import * as React from "react";
+import { notFound } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 async function getPaste(id: string) {
-  const res = await fetch(`http://localhost:3000/api/paste/${id}`, { cache: 'no-store' })
-  if (!res.ok) return null
-  return res.json()
+  const res = await fetch(`http://localhost:3000/api/paste/${id}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  return res.json();
 }
 
-export default async function PastePage({ params }: { params: { id: string } }) {
-  const paste = await getPaste(params.id)
+export default async function PastePage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const paste = await getPaste(params.id);
 
   if (!paste) {
-    notFound()
+    notFound();
   }
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Paste {params.id}</h1>
-      <pre className="p-4 rounded-md whitespace-pre-wrap">{paste.content}</pre>
+      <pre className="p-4 rounded-md whitespace-pre-wrap"></pre>
       <div className="mt-4">
-        <Button asChild>
-          <Link href="/">Create New Paste</Link>
-        </Button>
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle>Paste Code {params.id}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription>{paste.content}</CardDescription>
+          </CardContent>
+          <CardFooter>
+            <Button>
+              <Link href="/">Create New Paste</Link>
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     </div>
-  )
+  );
 }
